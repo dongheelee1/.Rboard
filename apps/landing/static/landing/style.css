@@ -1,0 +1,57 @@
+  	.nav-wrapper{
+  		background-color: #005a8c;
+  	}
+  	.waves-effect{
+  		background-color: #fb7d0f;
+  	}
+  	.waves-light{
+  		background-color: #fb7d0f;
+  	}
+	#logo a{
+	  		margin: 3px 10px 0px 30px;
+	  		border-radius: 5px;
+	  		color: #fb7d0f;
+	  		height: 56px;
+	  		width: 165px;
+	  		padding: 0px 0px 0px 26px;
+	  		display: inline-block;
+	  		background-color: white;
+	  	}
+  	#people_talking{
+  		margin: 20px 0px 0px 20px;
+  	}
+  	#main_left{
+  		display: inline-block;
+  		vertical-align: top;
+  	}
+  	#main_right{
+  		display: inline-block;
+  		vertical-align: top;
+  		margin: 90px 0px 0px 0px;
+  	}
+	  	#main_right p:first{
+	  		font-size: 25px;
+	  	}
+	  	#main_right h3{
+	  		transform: rotate(-10deg);
+	  		margin: 0px 0px 0px 73px;
+	  		border-style: solid;
+	  		border-color: #FFFFFF #FFFFFF #005a8c #FFFFFF;
+	  		width: 375px;
+	  	}
+	  	#main_right h4{
+	  		margin: 50px 0px 0px 300px;
+	  		border-style: solid;
+			border-color: #FFFFFF #FFFFFF #fb7d0f #FFFFFF;
+	  		width: 290px;
+	  	}
+  	#nav-mobile i{
+  		font-size: 12px;
+  		color: #fb7d0f;
+  	}
+  	#registration_box{
+  		margin: 35px 0px 0px 115px;
+  	}
+	  	#registration_box a{
+	  		margin: 0px 0px 0px 10px;
+	  	}

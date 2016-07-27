@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>Dashboard</title>
+</head>
+<body>
+	<h1>Dashboard</h1>
+</body>
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Username</th>
+				<th>Email</th>
+				<th>Created At</th>
+				{% if curr_user.user_status == 1 %}
+					<th>User Status</th>
+					<th>Action 1</th>
+					<th>Action 2</th>
+				{% endif %}
+			</tr>
+		</thead>
+		<tbody>
+			{% for user in all_users%}
+			<tr>
+				<td>{{user.id}}</td>
+				<td><a href="../../user_wall/{{user.id}}">{{user.username}}</a></td>
+				<td>{{user.email}}</td>
+				<td>{{user.created_at}}</td>
+				{% if curr_user.user_status == 1 %}
+					{% if user.user_status == 1 %}
+						<td>Admin</td> 
+					{% else %}
+						<td>Normal</td>
+					{% endif %}
+					<td><a href="">edit</a></td>
+					<td><a href="">remove</a></td>
+				{% endif %}
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+  {% load staticfiles %}
+  <link rel="stylesheet" type="text/css" href="{% static 'landing/style.css' %}">
+</head>
+<body>
+	<!--Import jQuery before materialize.js-->
+	<div class="container" style="vertical-align: top;">
+		<nav>
+			<div class="nav-wrapper">
+			  <p id="logo"><a href="#" class="brand-logo">.Rboard</a></p>
+			  <ul id="nav-mobile" class="right hide-on-med-and-down">
+			  	<li><i>Login if you already have an account</i></li>
+			    <li><a class="waves-effect waves-light btn" href="/login_registration/login">Login</a></li>
+			  </ul>
+			</div>
+		</nav>
+		<div class="col s12 m9 l10">
+			<div id="main_left">
+				{% load staticfiles %}
+				<img src="{% static 'landing/imgs/conversations-300x298.jpg' %}" id="people_talking">
+			</div>
+			<div id="main_right">
+				<h3>Talk. Share. Make.</h3>
+				<h4>Random Things.</h4>
+				<div id="registration_box">
+					<p>Are you board? Register!<a class="waves-effect waves-light btn" href="/login_registration/register">Register</a></p>
+				</div>
+			</div>
+			<div id="main_bottom">
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
