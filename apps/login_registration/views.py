@@ -12,6 +12,8 @@ def show_register(request):
 	
 def create_login(request):
 	user_results = User.userManager.login(request.POST['email'], request.POST['pw'])
+	print user_results
+	print User.objects.all()
 	if user_results[0] == True:
 		request.session['username'] = user_results[1][0].username
 		request.session['user_id'] = user_results[1][0].id
@@ -20,6 +22,7 @@ def create_login(request):
 		for key, error in user_results[1].iteritems():
 			messages.error(request, error)
 	return redirect(reverse('show_login'))
+	
 def create_register(request):
 	user_results = User.userManager.register(request.POST['username'], request.POST['email'], request.POST['pw'], request.POST['cpw'])
 

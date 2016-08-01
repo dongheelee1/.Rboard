@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Admin Edit Profile</title>
+	<link rel="stylesheet" type="text/css" href="">
+</head>
+<body>
+	<a href="{% url 'index' %}">Home</a>
+	<a href="{% url 'show_user_profile' %}">My Profile</a>
+	<h1>Admin Access - Edit User #{{user.id}}</h1>
+	<h1>Change User Identity</h1>
+	<form id="edit_form" action="{% url 'admin_update_status' user.id %}" method="post">
+		{% csrf_token %}
+		<p>Username: <input type="text" name="username"></p>
+		<p>Email: <input type="email" name="email"></p>
+		{% if user.user_status != 1 %}
+			<p>User Status:
+				<select name="user_status">
+					<option value="0">Normal</option>
+					<option value="1">Admin</option>
+				</select>
+			</p>
+		{% else %}
+			<input type="hidden" name="user_status" value="1">
+		{% endif %}
+		<p><input type="submit" value="Edit"></p>
+	</form>
+	<h1>Change User Password</h1>
+	<form id="PW_form" method="post" action="{% url 'admin_update_password' user.id %}">
+		{% csrf_token %}
+		<p>Password: <input type="password" name="pw"></p>
+		<p>Confirm Password: <input type="password" name="cpw"></p>
+		<p><input type="submit" value="Change Password"></p>
+	</form>
+	<div class="messages">
+	  {% if messages %}
+	    <ul class="messages">
+	        {% for message in messages %}
+	        <li>{{ message }}</li>
+	        {% endfor %}
+	    </ul>
+	  {% endif %}
+	</div>
+</body>
+</html>

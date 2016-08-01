@@ -45,20 +45,79 @@ class UserManager(models.Manager):
 		messages = {}
 		if not email or not password:
 			messages['all_fields_error'] = "No fields can be blank"
+
 		if messages:
 			return (False, messages)
 		else:
 			user = self.filter(email=email)
-			print "hello"
-			print bcrypt.hashpw(password.encode('utf-8'), user[0].password.encode('utf-8'))
-			print user[0].password
-
 			if user and bcrypt.hashpw(password.encode('utf-8'), user[0].password.encode('utf-8')) == user[0].password:
+				print bcrypt.hashpw(password.encode('utf-8'), user[0].password.encode('utf-8'))
+				print user[0].password
 				return (True, user)
 			else:
 				messages['register_error'] = "Must register before logging in"
 				return(False, messages)
 
+	def update_status(self, username, email, user_id, user_status):
+		messages = {}
+
+		if not username and not email:
+			messages['all_fields_error'] = "No fields can be blank"
+		if messages:
+			return (False, messages)
+		else:
+			user = self.get(id=user_id)
+			user.username = username
+			user.email = email
+			user.user_status = user_status
+			user.save()
+			messages['update_success'] = "Updated successfully!"
+			return (True, messages)
+	def update_profile(self, username, email, user_id):
+		messages = {}
+		if not username and not email: 
+			messages['all_fields_error'] = "No fields can be blank"
+		if messages:
+			return (False, messages)
+		else:
+			user = self.get(id=user_id)
+			user.username=username
+			user.email = email
+			user.save()
+			messages['update_success'] = "Updated successfully"
+			return (True, messages)
+	def update_password(self, user_id, pw, cpw):
+		messages = {}
+		if not pw and not cpw:
+			messages['all_fields_error'] = "No fields can be blank"
+		elif pw != cpw:
+			messages['password_error'] = "Passwords must match"
+		if messages:
+			return (False, messages)
+		else:
+			user = self.get(id=user_id)
+			#bcrypt password
+			password = bcrypt.hashpw(pw.encode('utf-8'), bcrypt.gensalt())
+			user = self.get(id=user_id)
+			user.password = password
+			user.save()
+			messages['update_success'] = "Updated successfully"
+			return (True, messages)
+
+	def update_description(self, description, user_id):
+		messages = {}
+		if not description:
+			messages['description_error'] = "Description can't be blank"
+		if messages:
+			return(False, messages)
+		else:
+			user = self.get(id=user_id)
+			user.description = description
+			user.save()
+			messages['update_success'] = 'Updated successfully'
+			return (True, messages)
+	def delete_user(self, user_id):
+		return self.filter(id=user_id).delete()
 
 
 # Create your models here.
@@ -66,6 +125,7 @@ class User(models.Model):
 	username = models.CharField(max_length=255)
 	email = models.EmailField()
 	password = models.CharField(max_length=255)
+	description = models.TextField(max_length=2500, default='', editable=True)
 	user_status = models.IntegerField(default=0)
 	updated_at = models.DateTimeField(auto_now_add = True, auto_now=False)
 	created_at = models.DateTimeField(auto_now_add = False, auto_now=True)

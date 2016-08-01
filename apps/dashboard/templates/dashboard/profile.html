@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>My Profile</title>
+</head>
+<body>
+	<a href="{% url 'index' %}">Home</a>
+	<h1>My Profile</h1>
+	<h1>Change My Identity</h1>
+	<form action="{% url 'user_update_profile' request.session.user_id %}" method="post">
+		{% csrf_token %}
+		<p><input type="text" name="username" placeholder="Username"></p>
+		<p><input type="text" name="email" placeholder="Email"></p>
+		<p><input type="submit" value="Edit"></p>
+	</form> 
+
+	<h1>Change My Password</h1>
+	{{request.session.user_id}}
+	{{user.password}}
+ 	<form action="{% url 'user_update_password' request.session.user_id %}" method="post">
+ 		{% csrf_token %}
+ 		<p><input type="password" name="pw" placeholder="Password"></p>
+ 		<p><input type="password" name="cpw" placeholder="Confirm Password"></p>
+ 		<p><input type="submit" value="Change password"></p>
+	</form>
+
+	<h3>Edit My Profile Description</h3>
+	{{user.description}}
+	<form action="{% url 'user_update_description' request.session.user_id %}" method="post">
+		{% csrf_token %}
+		<p><textarea name="description" placeholder="Description"></textarea></p>
+		<p><input type="submit" value="Edit description"></p>
+	</form>
+	<div class="messages">
+	  {% if messages %}
+	    <ul class="messages">
+	        {% for message in messages %}
+	        <li>{{ message }}</li>
+	        {% endfor %}
+	    </ul>
+	  {% endif %}
+	</div>
+</body>
+</html>
